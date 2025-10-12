@@ -20,8 +20,34 @@
         <div class="framer">
             {% if token %}
             <!-- your token display -->
-            <div class="framer">
+            <div class="framer" style="margin-bottom: 100px;">
                 <div class="post">
+                    <!-- \/ admin controls =================================================================================== -->
+                    {% if user.is_authenticated %}
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; width: 100%;">
+                            <form method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="plus">
+                                <button type="submit" style="display:inline-block; color: var(--wht01); background-color: var(--wht03); border-radius: 5px; width: 40px;">+</button>
+                            </form>
+
+                            <form method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="set">
+                                <input type="text" name="value" value="{{ token.number }}" 
+                                    style="display:inline-block; color: var(--wht04); background-color: var(--wht01); border: 2px solid var(--wht02); width:80px; text-align:center;">
+                                <button type="submit" style="visibility: hidden;">OK</button>
+                            </form>
+
+                            <form method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="minus">
+                                <button type="submit" style="display:inline-block; color: var(--wht01); background-color: var(--wht03); border-radius: 5px; width: 40px;">-</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                    <!-- /\ admin controls =================================================================================== -->
+
                     <a href="#" class="image small-image">
                         <h1>{{ token.number }}</h1>
                     </a>
@@ -63,8 +89,8 @@
         </div>
     </div>
     <footer>
-        <span>Александр Бараускас</span>
-        <span>© 2025</span>
+        <span>© 2025 Александр Бараускас (equa)</span>
+        <!-- <span>© 2025</span> -->
     </footer>
 </div>
 {% endblock %} 

@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="index" style="padding: 150px;">
+    <div>
+        {% if form.errors %}
+            <p style="color:red;">Неверное имя или пароль</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label>Логин:</label><br>
+            <input type="text" name="username" required style="color: black;"><br><br>
+
+            <label>Пароль:</label><br>
+            <input type="password" name="password" required style="color: black;"><br><br>
+
+            <button type="submit" style="color: black; padding: 5px; border-radius: 5px;">Войти</button>
+        </form>
+    </div>
+
+    <footer>
+        <span>© 2025 Александр Бараускас (equa)</span>
+    </footer>
+</div>
+{% endblock %} 

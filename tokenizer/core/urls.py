@@ -6,6 +6,6 @@ from . import views
 urlpatterns = [
     path('redir',views.redir,name='redir'),
     path('',views.index,name='index'),
-#    path('about',views.about,name='about'),
-#    path('ideas',views.ideas,name='ideas'),
+   path('login',views.login,name='login'),
+   path('logout',views.logout,name='logout'),
 ]
