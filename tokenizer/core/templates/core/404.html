@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="page-not-found">
+    <h5 class="reveal">404</h5>
+    <h1 class="reveal">К сожалению, эта страница не существует.<br>Может быть она появится в будущем!</h1>
+    <h5 class="reveal">А сейчас вы можете перейти на другую страницу в боковом меню или вернуться на главную.</h5>
+
+    <a class="reveal" href="{% url 'redir' %}"><span>Вернуться на главную</span></a>
+</div>
+{% endblock %} 

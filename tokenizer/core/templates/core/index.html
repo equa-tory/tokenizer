@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="index">
+    <header>
+        <span>Привет, hello there!</span>
+        <h1>
+            {% if token.header %}
+                {{ token.header }}
+            {% else %}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Est velit officiis voluptate quas. Neque, quidem maiores praesentium, incidunt itaque ex nesciunt assumenda laudantium, quasi molestiae at earum harum? Incidunt, distinctio?
+            {% endif %}
+        </h1>
+    </header>
+
+    <div class="separator"></div>
+    
+    <div class="content">
+        <div class="framer">
+            {% if token %}
+            <!-- your token display -->
+            <div class="framer">
+                <div class="post">
+                    <a href="#" class="image small-image">
+                        <h1>{{ token.number }}</h1>
+                    </a>
+                    <div class="framer">
+                        <div class="name">
+                            {% if token.title %}
+                            <span class="title">{{ token.title }}</span>
+                            {% endif %}
+                            {% if token.description %}
+                            <span class="description">{{ token.description }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="date">{{ token.date }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+            
+            <div class="framer">
+                <div class="post">
+                    <a href="#" class="image small-image">
+                        <h1>163wwwww</h1>
+                    </a>
+                    <div class="framer">
+                        <div class="name">
+                            <span class="title">Nuisance</span>
+                            <span class="description">it was cool</span>
+                        </div>
+                        <span class="date">12.12.2026</span>
+                    </div>
+                </div>
+            </div>
+            <!-- <p>No token available yet.</p> -->
+        {% endif %}
+
+
+
+        </div>
+    </div>
+    <footer>
+        <span>Александр Бараускас</span>
+        <span>© 2025</span>
+    </footer>
+</div>
+{% endblock %} 
