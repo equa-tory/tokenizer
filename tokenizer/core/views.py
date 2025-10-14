@@ -36,7 +36,7 @@ def index(request):
                 token.number = new_value
                 updated = True
         if updated:
-            token.date = date.today()  # <-- обновляем дату
+            token.date = date.today()
             token.save()
         return redirect("index")
 
@@ -78,5 +78,6 @@ def token_data(request):
         'number': token.number,
         'title': token.title,
         'description': token.description,
-        'date': token.date.strftime('%d.%m.%Y'),
+        # 'date': token.date.strftime('%d.%m.%Y'),
+        'date': token.date.strftime('%b. %d, %Y'),
     })

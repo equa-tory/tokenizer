@@ -25,13 +25,13 @@
                     <!-- \/ admin controls =================================================================================== -->
                     {% if user.is_authenticated %}
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px; width: 100%;">
-                            <form method="post" style="display:inline;">
+                            <form class="token-form" data-action="plus" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="action" value="plus">
                                 <button type="submit" style="display:inline-block; color: var(--wht01); background-color: var(--wht03); border-radius: 5px; width: 40px;">+</button>
                             </form>
 
-                            <form method="post" style="display:inline;">
+                            <form class="token-form" data-action="set" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="action" value="set">
                                 <input type="text" name="value" value="{{ token.number }}" 
@@ -39,7 +39,7 @@
                                 <button type="submit" style="visibility: hidden;">OK</button>
                             </form>
 
-                            <form method="post" style="display:inline;">
+                            <form class="token-form" data-action="minus" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="action" value="minus">
                                 <button type="submit" style="display:inline-block; color: var(--wht01); background-color: var(--wht03); border-radius: 5px; width: 40px;">-</button>
@@ -67,7 +67,7 @@
 
             {% else %}
             
-            <div class="framer">
+            <!-- <div class="framer">
                 <div class="post">
                     <a href="#" class="image small-image">
                         <h1>163wwwww</h1>
@@ -80,8 +80,8 @@
                         <span class="date">12.12.2026</span>
                     </div>
                 </div>
-            </div>
-            <!-- <p>No token available yet.</p> -->
+            </div> -->
+            <p>No token available yet.</p>
         {% endif %}
 
 
@@ -116,5 +116,31 @@ async function updateToken() {
 }
 
 setInterval(updateToken, 3000);
+
+document.querySelectorAll('.token-form').forEach(form => {
+    form.addEventListener('submit', async e => {
+        e.preventDefault(); // don't reload page
+
+        const action = form.dataset.action;
+        const value = form.querySelector('[name=value]')?.value;
+        const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        const response = await fetch("{% url 'index' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrfToken,
+                "X-Requested-With": "XMLHttpRequest",
+            },
+            body: new URLSearchParams({
+                action: action,
+                value: value || ""
+            })
+        });
+
+        if (response.ok) {
+            updateToken();
+        }
+    });
+});
 </script>
 {% endblock %} 
