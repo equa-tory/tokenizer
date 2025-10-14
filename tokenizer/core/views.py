@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from .models import Token
 from datetime import date
+from django.http import JsonResponse
 
 
 def redir(request):
@@ -69,3 +70,13 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('login')
+
+
+def token_data(request):
+    token = Token.objects.first()
+    return JsonResponse({
+        'number': token.number,
+        'title': token.title,
+        'description': token.description,
+        'date': token.date.strftime('%d.%m.%Y'),
+    })

@@ -93,4 +93,28 @@
         <!-- <span>© 2025</span> -->
     </footer>
 </div>
+
+<script>
+const numberEl = document.querySelector('.post h1');
+
+async function updateToken() {
+    const response = await fetch("{% url 'token_data' %}");
+    const data = await response.json();
+
+    if (numberEl.textContent != data.number) {
+        numberEl.style.transition = 'opacity 0.4s';
+        numberEl.style.opacity = '0';
+        setTimeout(() => {
+            numberEl.textContent = data.number;
+            numberEl.style.opacity = '1';
+        }, 400);
+    }
+
+    document.querySelector('.title').textContent = data.title;
+    document.querySelector('.description').textContent = data.description;
+    document.querySelector('.date').textContent = data.date;
+}
+
+setInterval(updateToken, 3000);
+</script>
 {% endblock %} 
