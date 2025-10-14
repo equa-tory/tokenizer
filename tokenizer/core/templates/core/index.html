@@ -54,7 +54,7 @@
                     <div class="framer">
                         <div class="name">
                             {% if token.title %}
-                            <span class="title">{{ token.title }}</span>
+                            <span class="title token-title">{{ token.title }}</span>
                             {% endif %}
                             {% if token.description %}
                             <span class="description">{{ token.description }}</span>
@@ -110,7 +110,7 @@ async function updateToken() {
         }, 400);
     }
 
-    document.querySelector('.title').textContent = data.title;
+    document.querySelector('.token-title').textContent = data.title;
     document.querySelector('.description').textContent = data.description;
     document.querySelector('.date').textContent = data.date;
 }
