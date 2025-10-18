@@ -20,13 +20,13 @@ def index(request):
         updated = False
         if action == "plus":
             try:
-                token.number = str(int(token.number) + 1)
+                token.number = str(int(token.number) + 1).zfill(3)
                 updated = True
             except ValueError:
                 pass
         elif action == "minus":
             try:
-                token.number = str(int(token.number) - 1)
+                token.number = str(int(token.number) - 1).zfill(3)
                 updated = True
             except ValueError:
                 pass
@@ -84,7 +84,7 @@ def token_data(request):
 
 def add_token(request):
     token = Token.objects.first()
-    token.number = str(int(token.number) + 1)
+    token.number = str(int(token.number) + 1).zfill(3)
     token.date = date.today()
     token.save()
 
