@@ -81,3 +81,11 @@ def token_data(request):
         # 'date': token.date.strftime('%d.%m.%Y'),
         'date': token.date.strftime('%b. %d, %Y'),
     })
+
+def add_token(request):
+    token = Token.objects.first()
+    token.number = str(int(token.number) + 1)
+    token.date = date.today()
+    token.save()
+
+    return JsonResponse({'success': True})
